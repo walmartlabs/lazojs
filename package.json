@@ -1,0 +1,31 @@
+{
+    "name": "lazo",
+    "version": "0.1.0",
+    "description": "Best framework ever.",
+    "private": true,
+    "scripts": {
+        "start": "lazo"
+    },
+    "main": "index",
+    "bin": {
+        "lazo": "lazo.js"
+    },
+    "dependencies": {
+        "crumb": "0.3.x",
+        "hapi": "1.8.x",
+        "node-dir": "0.0.3",
+        "requirejs": "2.1.8",
+        "request": "2.27.0",
+        "winston": "0.7.x",
+        "clean-css": "1.0.12",
+        "forever": "0.10.8",
+        "fs-extra": "0.6.3",
+        "handlebars": "1.0.12",
+        "optimist": "0.6.0"
+    },
+    "devDependencies": {
+        "grunt-contrib-requirejs": "0.4.x",
+        "grunt": "0.4.x",
+        "grunt-castle": "git+ssh://git@github.com:walmartlabs/grunt-castle.git"
+    }
+}

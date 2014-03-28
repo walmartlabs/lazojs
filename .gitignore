@@ -1,0 +1,8 @@
+.idea
+lib-cov
+node_modules
+node_modules
+npm-debug.log
+reports
+test/specs/html/**
+vendor
