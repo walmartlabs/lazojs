@@ -1,0 +1,8 @@
+.idea
+/vendor
+lib-cov
+node_modules
+npm-debug.log
+reports
+test/mocks/lazo.js
+test/specs/html/**

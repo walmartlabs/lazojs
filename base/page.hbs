@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- handlebars -f simplePage.js -a simplePage.hbs -->
+
+{{#if htmlTag}}
+{{{htmlTag}}}
+{{else}}
+<html>
+{{/if}}
+<head>
+    <meta charset="UTF-8">
+    {{#each tags}}
+        <{{name}} {{#each attributes}}{{@key}}="{{this}}" {{/each}}>{{content}}</{{name}}>
+    {{/each}}
+    {{#each dependencies.css}}
+        <link rel="stylesheet" type="text/css" href="{{this}}">
+    {{/each}}
+
+    <script type="text/javascript">
+        window.addEventListener('load', function (e) {
+            window.applicationCache.addEventListener('updateready', function (e) {
+                if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+                    window.location.reload();
+                }
+            }, false);
+        }, false);
+    </script>
+
+    <script type="text/javascript">
+        var LAZO = {
+            initConf: {
+                layout: '{{layout}}',
+                rootCtx: {{{rootCtx}}},
+                rootCtl: {{{rootCtl}}},
+                shim: {{{shim}}},
+                paths: {{{paths}}},
+                args: {{{args}}}
+            }
+        };
+    </script>
+    <script src="/lib/vendor/require.js"></script>
+    {{#if lib}}
+        <script type="text/javascript">
+            requirejs(['{{lib}}'], function () {
+                var bootstrap = requirejs.config({
+                    baseUrl: '/',
+                    paths: {
+                        'resolver': 'lib/common/resolver',
+                        'text': 'vendor/text',
+                        'json': 'vendor/json'
+                    }
+                });
+
+                bootstrap(['bootstrap'], function () {});
+            });
+        </script>
+    {{else}}
+        <script type="text/javascript">
+            (function () {
+                var bootstrap = requirejs.config({
+                    baseUrl: '/',
+                    paths: {
+                        'resolver': 'lib/common/resolver',
+                        'text': 'vendor/text',
+                        'json': 'vendor/json'
+                    }
+                });
+
+                bootstrap(['bootstrap'], function () {});
+            })();
+        </script>
+    {{/if}}
+</head>
+<body{{#if bodyClass}} class='{{bodyClass}}'{{/if}}>
+    {{{body}}}
+</body>
+</html>
