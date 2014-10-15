@@ -2,7 +2,6 @@
 lib-cov
 node_modules
 reports
-test/mocks/lazo.js
 test/specs/html/**
 node_modules
 npm-debug.log
