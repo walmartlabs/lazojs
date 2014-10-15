@@ -1,8 +1,8 @@
 module.exports = function (grunt) {
 
-    var fs = require('fs'),
-        path = require('path'),
-        reqConf = JSON.parse(fs.readFileSync('lib/common/resolver/paths.json', 'utf8'));
+    var fs = require('fs');
+    var path = require('path');
+    var reqConf = grunt.file.readJSON('lib/common/resolver/paths.json');
 
     function getPaths(conf, env) {
         var paths = grunt.util._.extend({}, conf.common, (conf[env] || conf.client));
@@ -13,16 +13,27 @@ module.exports = function (grunt) {
         return paths;
     }
 
-    grunt.registerTask('merge-mocks', 'Merge lazo mocks.', function () {
-        var dst = grunt.config.get('castle').lazo.options.mocks.baseUrl,
-            src = './node_modules/lazo-mocks';
-
-        fs.readdirSync('./node_modules/lazo-mocks').forEach(function (mock) {
-            if (path.extname(mock) === '.js') {
-                grunt.file.copy(path.normalize(src + '/' + mock), path.normalize(dst + '/' + mock));
-            }
+    grunt.registerTask('configure-intern', 'Create intern configuration for runner', function () {
+        var env = this.args[0] === 'client-local' ? 'client' : this.args[0];
+        var paths = getPaths(reqConf, env);
+        var specs = grunt.file.expand([
+            'test/unit/' + env + '/**/*.js',
+            'test/unit/client-server/**/*.js',
+            '!**/*.skip.js'
+        ]);
+        specs = specs.map(function (spec) {
+            return spec.substr(0, spec.lastIndexOf('.js'));
         });
+        var conf = grunt.config.get('intern');
+        conf[this.args[0]].options.suites = specs;
+        grunt.config.set('intern', conf);
     });
+
+    grunt.registerTask('test-server', ['configure-intern:server', 'intern:server']);
+    grunt.registerTask('test-client', ['configure-intern:client', 'intern:client']);
+    grunt.registerTask('test-client-local', ['configure-intern:client-local', 'intern:client-local']);
+    grunt.registerTask('test', ['test-server', 'test-client']);
+    grunt.registerTask('test-local', ['test-server', 'test-client-local']);
 
     grunt.initConfig({
 
@@ -64,64 +75,29 @@ module.exports = function (grunt) {
             }
         },
 
-        castle: {
-
-            lazo: {
-
+        intern: {
+            'client-local': {
                 options: {
-
-                    mocks: {
-                        server: {
-                            baseUrl: './test/mocks',
-                            paths: grunt.file.readJSON('./test/mocks/lazo/paths.json')
-                        },
-                        client: {
-                            baseUrl: './test/mocks',
-                            paths: grunt.file.readJSON('./test/mocks/lazo/paths.json')
-                        }
-                    },
-
-                    specs: {
-                        baseUrl: 'test/specs',
-                        client: 'client/**/*.js',
-                        server: 'server/**/*.js',
-                        common: 'shared/**/*.js',
-                        'client-target': 'test/specs/html'
-                    },
-
-                    requirejs: {
-                        server: {
-                            baseUrl: '.',
-                            paths: getPaths(reqConf, 'server')
-                        },
-                        client: {
-                            baseUrl: '.',
-                            paths: getPaths(reqConf, 'client')
-                        }
-                    },
-
-                    reporting: {
-                        dest: 'reports',
-                        src: 'lib',
-                        options: {},
-                        analysis: {
-                            files: ['lib/**/*.js', '!lib/vendor/**']
-                        },
-                        coverage: {
-                            dest: 'lib-cov',
-                            exclude: 'vendor'
-                        }
-                    }
-
+                    runType: 'runner',
+                    config: 'test/unit/conf.client.local'
                 }
-
+            },
+            client: {
+                options: {
+                    runType: 'runner',
+                    config: 'test/unit/conf.client'
+                }
+            },
+            server: {
+                options: {
+                    config: 'test/unit/conf.server'
+                }
             }
-
         }
 
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.loadNpmTasks('grunt-castle');
+    grunt.loadNpmTasks('intern');
 };
