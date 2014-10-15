@@ -17,4 +17,4 @@ env:
 addons:
   sauce_connect: true
 before_script:
-  node node_modules/selenium-server/bin/selenium &
+  ./before.sh
