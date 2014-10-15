@@ -1,1 +1,0 @@
-These files are being used by client/commonUtilsDocument.js to doc.updateCss.
