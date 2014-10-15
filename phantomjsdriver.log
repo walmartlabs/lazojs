@@ -1,0 +1,27 @@
+[INFO  - 2014-10-15T18:14:18.049Z] GhostDriver - Main - running on port 13386
+[INFO  - 2014-10-15T18:14:18.140Z] Session [14106090-5497-11e4-b7e2-0173a7c5f818] - CONSTRUCTOR - Desired Capabilities: {"idle-timeout":60,"browserName":"phantomjs","name":"test/unit/conf.client.phantomjs"}
+[INFO  - 2014-10-15T18:14:18.140Z] Session [14106090-5497-11e4-b7e2-0173a7c5f818] - CONSTRUCTOR - Negotiated Capabilities: {"browserName":"phantomjs","version":"1.9.1","driverName":"ghostdriver","driverVersion":"1.0.3","platform":"mac-unknown-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2014-10-15T18:14:18.140Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 14106090-5497-11e4-b7e2-0173a7c5f818
+[ERROR - 2014-10-15T18:14:18.391Z] RouterReqHand - _handle - Thrown => {
+  "message": "Request => {\"headers\":{\"Accept-Encoding\":\"gzip,deflate\",\"Cache-Control\":\"no-cache\",\"Connection\":\"Keep-Alive\",\"Host\":\"localhost:13386\",\"User-Agent\":\"Apache-HttpClient/4.3.4 (java 1.5)\"},\"httpVersion\":\"1.1\",\"method\":\"GET\",\"url\":\"/log/types\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"types\",\"directory\":\"/log/\",\"path\":\"/log/types\",\"relative\":\"/log/types\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/log/types\",\"queryKey\":{},\"chunks\":[\"log\",\"types\"]},\"urlOriginal\":\"/session/14106090-5497-11e4-b7e2-0173a7c5f818/log/types\"}",
+  "name": "Invalid Command Method",
+  "line": 183,
+  "sourceId": 202402184,
+  "sourceURL": ":/ghostdriver/request_handlers/session_request_handler.js",
+  "stack": "Invalid Command Method: Request => {\"headers\":{\"Accept-Encoding\":\"gzip,deflate\",\"Cache-Control\":\"no-cache\",\"Connection\":\"Keep-Alive\",\"Host\":\"localhost:13386\",\"User-Agent\":\"Apache-HttpClient/4.3.4 (java 1.5)\"},\"httpVersion\":\"1.1\",\"method\":\"GET\",\"url\":\"/log/types\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"types\",\"directory\":\"/log/\",\"path\":\"/log/types\",\"relative\":\"/log/types\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/log/types\",\"queryKey\":{},\"chunks\":[\"log\",\"types\"]},\"urlOriginal\":\"/session/14106090-5497-11e4-b7e2-0173a7c5f818/log/types\"}\n    at :/ghostdriver/request_handlers/session_request_handler.js:183\n    at :/ghostdriver/request_handlers/request_handler.js:61\n    at :/ghostdriver/request_handlers/router_request_handler.js:82",
+  "stackArray": [
+    {
+      "sourceURL": ":/ghostdriver/request_handlers/session_request_handler.js",
+      "line": 183
+    },
+    {
+      "sourceURL": ":/ghostdriver/request_handlers/request_handler.js",
+      "line": 61
+    },
+    {
+      "sourceURL": ":/ghostdriver/request_handlers/router_request_handler.js",
+      "line": 82
+    }
+  ]
+}
+[INFO  - 2014-10-15T18:14:21.093Z] ShutdownReqHand - _handle - About to shutdown
