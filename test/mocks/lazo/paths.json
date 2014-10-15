@@ -1,7 +1,0 @@
-{
-    "lazoMocksBase": "base",
-    "lazoMocksCtlFactory": "ctlFactory",
-    "lazoMocksCtxFactory": "ctxFactory",
-    "lazoMocksCtl": "lazoCtl",
-    "lazoMocksView": "view"
-}
