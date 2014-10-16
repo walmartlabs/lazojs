@@ -31,7 +31,7 @@
     "scripts": {
         "start": "lazo",
         "postinstall": "node bin/postinstall",
-        "test": "grunt castle"
+        "test": "grunt test"
     },
     "main": "index",
     "bin": {
@@ -60,8 +60,13 @@
     },
     "devDependencies": {
         "grunt-contrib-requirejs": "0.4.x",
-        "grunt": "0.4.x",
-        "grunt-castle": "0.4.x",
-        "grunt-contrib-watch": "0.5.x"
+        "grunt": "0.4.5",
+        "grunt-contrib-watch": "0.5.x",
+        "intern": "2.1.1",
+        "sinon-chai": "2.6.0",
+        "sinon": "1.10.3",
+        "phantomjs": "1.9.10",
+        "selenium-server": "2.43.1",
+        "grunt-exec": "0.4.6"
     }
 }
