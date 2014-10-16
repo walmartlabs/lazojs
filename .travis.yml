@@ -5,8 +5,15 @@ before_install: npm install -g grunt-cli
 branches:
   only:
     - master
+    - development
 notifications:
   email:
-    - jstrimpel@walmartlabs.com
     - jstrimpel@gmail.com
     - pknepper@walmartlabs.com
+env:
+  global:
+    - secure: Ss0z/JgzCf3MXBwFYd75bLnMoG9OTY4cAcjVN6VMYxbHWrADooYCYCMx8PlAaDYKJIvhLq0bA4LnMfqAQHddyRp6/t2lb0vRE0WF51e1WHTZDQ8o9lWAur88LtGWZfeG5gIjjm/a3Q+c8V7rOxyFR2TkZuY7ClY9kS6tH2/Gkuc=
+    - secure: OqI1MSLFasYGdS5B5tfRNbn7ZKaXlgLNZ6S4eRBx9WoJL+nJcIZ2oOjzBIlUpzrmS6slTStBx6YIu1ToeL7FZjk73Xb2MKXE4xEimvMHoQjrZgYTcKxk9IpNKg2tvrrUYcaICuvE+FAcGhObMn41faGewy1ZDhWoQWejzgdIeoY=
+addons:
+  sauce_connect: true
+before_script: ./before_script.sh
