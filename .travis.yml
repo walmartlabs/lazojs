@@ -16,5 +16,4 @@ env:
     - secure: OqI1MSLFasYGdS5B5tfRNbn7ZKaXlgLNZ6S4eRBx9WoJL+nJcIZ2oOjzBIlUpzrmS6slTStBx6YIu1ToeL7FZjk73Xb2MKXE4xEimvMHoQjrZgYTcKxk9IpNKg2tvrrUYcaICuvE+FAcGhObMn41faGewy1ZDhWoQWejzgdIeoY=
 addons:
   sauce_connect: true
-before_script:
-  ./before.sh
+before_script: ./before_script.sh
