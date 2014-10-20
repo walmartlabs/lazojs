@@ -11,6 +11,8 @@ define(['intern/dojo/text!lib/common/resolver/paths.json', 'test/mocks/lazo'], f
     }
     LAZO.app.isServer = true;
     LAZO.app.isClient = false;
+    LAZO.isServer = true;
+    LAZO.isClient = false;
 
     var needle = '/{env}/';
     var serverPaths = {};

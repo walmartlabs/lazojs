@@ -18,8 +18,11 @@
     {{#each tags}}
         <{{name}} {{#each attributes}}{{@key}}="{{this}}" {{/each}}>{{content}}</{{name}}>
     {{/each}}
+    {{#each dependencies.imports}}
+        <link {{#each this}}{{@key}}="{{this}}" {{/each}} lazo-link="import">
+    {{/each}}
     {{#each dependencies.css}}
-        <link rel="stylesheet" type="text/css" href="{{this}}" lazo-link="css">
+        <link {{#each this}}{{@key}}="{{this}}" {{/each}} lazo-link="css">
     {{/each}}
 
     <script type="text/javascript">

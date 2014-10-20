@@ -17,14 +17,16 @@ define([
                     'test/a': {
                         state: {
                             dependencies: {
-                                css: ['a.css']
+                                css: [{ href: 'a.css' }],
+                                imports: [{ href: 'a.html' }]
                             }
                         }
                     },
                     'test/b': {
                         state: {
                             dependencies: {
-                                css: ['b.css']
+                                css: [{ href: 'b.css' }],
+                                imports: [{ href: 'b.html' }]
                             }
                         }
                     }
@@ -32,7 +34,8 @@ define([
                 history[window.location.pathname + window.location.search] = {
                         state: {
                             dependencies: {
-                                css: ['c.css']
+                                css: [{ href: 'c.css' }],
+                                imports: [{ href: 'c.html' }]
                             }
                         }
                 };
@@ -57,35 +60,44 @@ define([
             it('should create a state object', function () {
                 var ctx = {
                     dependencies: {
-                        css: ['components/a.css', 'components/b.css']
+                        css: [{ href: 'components/a.css' }, { href: 'components/b.css' }],
+                        imports: [{ href: 'components/a.html' }, { href: 'components/b.html' }]
                     }
                 };
                 var stateObj = state.createStateObj(ctx);
 
                 expect(stateObj.dependencies.css.length).to.be.equal(2);
+                expect(stateObj.dependencies.imports.length).to.be.equal(2);
             });
 
             it('should get a state object', function () {
-                expect(state.get('test/a').state.dependencies.css[0]).to.be.equal('a.css');
+                expect(state.get('test/a').state.dependencies.css[0].href).to.be.equal('a.css');
             });
 
             it('should set a state object', function () {
                 var ctx = {
                     dependencies: {
-                        css: ['components/a.css', 'components/a.1.css']
+                        css: [{ href: 'components/a.css' }, { href: 'components/a.1.css' }],
+                        imports: [{ href: 'components/a.html' }, { href: 'components/a.1.html' }]
                     }
                 };
 
                 expect(state.get(window.location.pathname + window.location.search).state.dependencies.css.length).to.be.equal(1);
+                expect(state.get(window.location.pathname + window.location.search).state.dependencies.imports.length).to.be.equal(1);
                 state.set(ctx);
                 expect(state.get(window.location.pathname + window.location.search).state.dependencies.css.length).to.be.equal(2);
+                expect(state.get(window.location.pathname + window.location.search).state.dependencies.imports.length).to.be.equal(2);
             });
 
             it('should get the css to add and remove', function () {
-                var css = state.getAddRemoveLinks();
+                var css = state.getAddRemoveLinks('css');
+                var imports = state.getAddRemoveLinks('imports');
 
-                expect(css.add[0]).to.be.equal('c.css');
-                expect(css.remove[0]).to.be.equal('a.css');
+                expect(css.add[0].href).to.be.equal('c.css');
+                expect(css.remove[0].href).to.be.equal('a.css');
+                expect(imports.add[0].href).to.be.equal('c.html');
+                expect(imports.remove[0].href).to.be.equal('a.html');
+
             });
 
         });

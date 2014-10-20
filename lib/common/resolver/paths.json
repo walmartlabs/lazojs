@@ -27,7 +27,6 @@
         "serverFileResolver": "lib/server/resolver/file",
         "loggerUtils": "lib/server/logger/utils",
         "handlebars" : "lib/vendor/handlebars.amd",
-        "bundler": "lib/public/bundle",
         "lazoBootstrap": "lib/client/bootstrap",
         "fileSink": "lib/server/logger/fileSink",
         "logger": "lib/common/logger",

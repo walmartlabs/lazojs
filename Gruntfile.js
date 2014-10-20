@@ -27,7 +27,7 @@ module.exports = function (grunt) {
         });
         var conf = grunt.config.get('intern');
         conf[this.args[0]].options.suites = specs;
-        if (!isSecure && env === 'client') {
+        if (!isSecure && env === 'client' && this.args[0] !== 'client-local') {
             conf[this.args[0]].options.config = 'test/unit/conf.client.phantomjs';
         }
         grunt.config.set('intern', conf);
@@ -67,7 +67,11 @@ module.exports = function (grunt) {
                     },
                     map: {
                         '*': {
-                            'l': '/lib/client/loader.js'
+                            'l': '/lib/client/loader.js',
+                            // don't define 'bundler' in paths.json because
+                            // it will result in a build error due to
+                            // duplicate paths; 'bundler' path is set at run time
+                            'bundler': 'lazoBundle'
                         }
                     },
                     outFileName: 'lib',

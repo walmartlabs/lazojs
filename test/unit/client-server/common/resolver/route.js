@@ -11,7 +11,7 @@ define([
 
     with (bdd) {
         describe('route resolver', function () {
-            it('transform routes', function () {
+            it('should transform routes', function () {
                 var foo = route.transform('foo(/)');
                 var bar = route.transform('bar');
                 var baz = route.transform('');

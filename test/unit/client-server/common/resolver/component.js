@@ -17,7 +17,13 @@ define([
                 'components/a/c.css': true,
                 'components/b/1.css': true,
                 'components/c/1.css': true,
-                'components/d/1.css': true
+                'components/d/1.css': true,
+                'components/a/imports/a.html': true,
+                'components/a/imports/b.html': true,
+                'components/a/imports/c.html': true,
+                'components/b/imports/1.html': true,
+                'components/c/imports/1.html': true,
+                'components/d/imports/1.html': true
             }
         };
 
@@ -77,12 +83,21 @@ define([
             });
 
             it('should get the CSS for a component', function () {
-                var css = component.getCss('a');
+                var css = component.getLinks('a', 'css');
 
                 expect(css.length).to.be.equal(3);
                 expect(css[0]).to.be.equal('components/a/a.css');
                 expect(css[1]).to.be.equal('components/a/b.css');
                 expect(css[2]).to.be.equal('components/a/c.css');
+            });
+
+            it('should get the imports for a component', function () {
+                var css = component.getLinks('a', 'import');
+
+                expect(css.length).to.be.equal(3);
+                expect(css[0]).to.be.equal('components/a/imports/a.html');
+                expect(css[1]).to.be.equal('components/a/imports/b.html');
+                expect(css[2]).to.be.equal('components/a/imports/c.html');
             });
 
         });
