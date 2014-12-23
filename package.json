@@ -65,7 +65,7 @@
         "intern": "2.1.1",
         "sinon-chai": "2.6.0",
         "sinon": "1.10.3",
-        "phantomjs": "1.9.10",
+        "phantomjs": "1.9.13",
         "selenium-server": "2.43.1",
         "grunt-exec": "0.4.6"
     }
