@@ -1,5 +1,3 @@
-## LazoSyncher
-
 The LazoSyncher is a server only concept in Lazo that allows developers to execute
 server side methods from models and collections on the client and server.
 

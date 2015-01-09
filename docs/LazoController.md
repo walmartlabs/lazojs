@@ -1,5 +1,3 @@
-# LazoController
-
 In LazoJS, controllers are optional, but the `LazoController` class must be [**extended**](#extend) for implementing the business logic of a new component.
 
 A controller is where routing action handlers must be implemented and it is also the recommended place to keep view action handlers. Having *fat controllers* and *thin views* is a practice that should facilitate testing, since views are typically more difficult to test.
@@ -38,11 +36,11 @@ define(['lazoCtl'], function (LazoController) {
 });
 ```
 
-## `addChild(container, cmpName, options)`
+### `addChild(container, cmpName, options)`
 
 Adds a child component into the given container.
 
-### Arguments
+#### Arguments
 
 1. `container` *(String)*: A component container name, it has to match the `lazo-cmp-container` attribute value from an existing tag in the current view;
 1. `cmpName` *(String)*: The name of component to be instantiated and added inside the given container;
@@ -53,7 +51,7 @@ Adds a child component into the given container.
   - `[success]` *(Function)*: Called after the child component has been successfully instantiated and added to the current view, it must implement the `function(childController)` interface:
     - `childController` *(Object)*: The child controller instance.
 
-### Example
+#### Example
 
 First, include a component container into current's view markup:
 
@@ -78,37 +76,37 @@ this.addChild('foo', 'bar', {
 ```
 
 <!--
-## `augmentCssLink(link)`
+### `augmentCssLink(link)`
 
-### Arguments
+#### Arguments
 
-### Returns
+#### Returns
 
-### Example
+#### Example
 -->
 
 <!--
-## `augmentImportLink(link)`
+### `augmentImportLink(link)`
 
-### Arguments
+#### Arguments
 
-### Returns
+#### Returns
 
-### Example
+#### Example
 -->
 
-## `clearCookie(name, [options])`
+### `clearCookie(name, [options])`
 
 Clears a cookie. See [`setCookie`](#setCookie).
 
-### Arguments
+#### Arguments
 
 1. `name` *(String)*: The cookie name;
 1.  `[options]` *(Object)*: The options hash:
   - `[domain]` *(String)*: The domain where the cookie is valid. It defaults to the current domain;
   - `[path]` *(String)*: The path where the cookie is valid. It defaults to the current path.
 
-### Example
+#### Example
 
 ```javascript
 this.clearCookie('preferences', {
@@ -118,7 +116,7 @@ this.clearCookie('preferences', {
 
 ```
 
-## `constructor(options)`
+### `constructor(options)`
 
 Creates a new controller instance. You may override it if you need to perform some initialization while the instance is created. The `LazoController` (or current superclass) constructor must be called though.
 
@@ -134,30 +132,30 @@ var BaseController = LazoController.extend({
 });
 ```
 
-### Arguments
+#### Arguments
 
 1. `options` *(Object)*: The options hash:
   - `name` *(String)*: The component name.
 
-### Returns
+#### Returns
 
 *(Object)*: A new controller instance.
 
 <!--
-## `create(cmpName, ctlOptions, options)`
+### `create(cmpName, ctlOptions, options)`
 
-### Arguments
+#### Arguments
 
-### Returns
+#### Returns
 
-### Example
+#### Example
 -->
 
-## `createCollection(collectionName, attributes, options)`
+### `createCollection(collectionName, attributes, options)`
 
 Creates a new collection instance.
 
-### Arguments
+#### Arguments
 
 1. `collectionName` *(String)*: The collection name, it should match a collection declared under the `models` directory;
 1. `[attributes]` *(Array)*: An array of attributes to initialize the child models;
@@ -169,7 +167,7 @@ Creates a new collection instance.
   - `[success]` *(Function)*: Called after the collection instance has been successfully created, it must implement the `function(collection)` interface:
     - `collection` *(LazoCollection)*: The recently created collection instance.
 
-### Example
+#### Example
 
 ```javascript
 this.createCollection('people', [
@@ -188,11 +186,11 @@ this.createCollection('people', [
 });
 ```
 
-## `createModel(modelName, attributes, options)`
+### `createModel(modelName, attributes, options)`
 
 Creates a new model instance.
 
-### Arguments
+#### Arguments
 
 1. `modelName` *(String)*: The model name, it should match a model declared under the `models` directory;
 1. `[attributes]` *(Object)*: An hash of attributes to initialize the model;
@@ -203,7 +201,7 @@ Creates a new model instance.
   - `[success]` *(Function)*: Called after the model instance has been successfully created, it must implement the `function(model)` interface:
     - `model` *(LazoModel)*: The recently created model instance.
 
-### Example
+#### Example
 
 ```javascript
 this.createModel('person', {
@@ -220,29 +218,29 @@ this.createModel('person', {
 ```
 
 <!--
-## `deserialize(ctl, options)`
+### `deserialize(ctl, options)`
 
-### Arguments
+#### Arguments
 
-### Returns
+#### Returns
 
-### Example
+#### Example
 -->
 
-## <a name="extend"></a>`extend([properties], [classProperties])`
+### <a name="extend"></a>`extend([properties], [classProperties])`
 
 Creates a custom controller class.
 
-### Arguments
+#### Arguments
 
 1. `[properties]` *(Object)*: An object describing the methods and properties for every class instance.
 1. `[classProperties]` *(Object)*: An object describing the **static** methods and  properties to be added to the custom controller constructor.
 
-### Returns
+#### Returns
 
 *(Function)*: Returns a constructor function for the custom controller class.
 
-### Example
+#### Example
 
 ```javascript
 var FooController = LazoController.extend({
@@ -270,46 +268,46 @@ fooController.foo();  // 'foo'
 ```
 
 <!--
-## `getImport(relativePath)`
+### `getImport(relativePath)`
 
-### Arguments
+#### Arguments
 
-### Returns
+#### Returns
 
-### Example
+#### Example
 -->
 
-## `getPageTitle()`
+### `getPageTitle()`
 
 Returns the current page title. See [`setPageTitle`](#setPageTitle).
 
-### Returns
+#### Returns
 
 *(String)*: The current page title.
 
 <!--
-## `getPath`
+### `getPath`
 
-### Arguments
+#### Arguments
 
-### Returns
+#### Returns
 
-### Example
+#### Example
 -->
 
-## <a name="getSharedData"></a>`getSharedData(key)`
+### <a name="getSharedData"></a>`getSharedData(key)`
 
 Returns the shared data stored under the given `key`. See  [`setSharedData`](#setSharedData).
 
-### Arguments
+#### Arguments
 
 - `key` *(String)*: The string key to retrieve the stored data from.
 
-### Returns
+#### Returns
 
 *(Object)*: The shared data stored under the given `key`.
 
-## <a name="initialize"></a>`initialize(options)`
+### <a name="initialize"></a>`initialize(options)`
 
 Initialize the new controller instance. You may override it if you need to perform some initialization just after the instance is created.
 
@@ -322,18 +320,18 @@ var BaseController = LazoController.extend({
 });
 ```
 
-### Arguments
+#### Arguments
 
 - `options` *(Object)*: The options hash:
   - `name` *(String)*: The component name.
 
-## `index(options)`
+### `index(options)`
 
 The default action handler. If not overridden, it renders the **index** view.
 
 Any additional action handlers should implement the same interface. Action handlers should never be called directly. See [`navigate`](#navigate).
 
-### Arguments
+#### Arguments
 
 - `[options]` *(Object)*: The options hash;
   - `[error]` *(Function)*: To be called if an error occurs, it implements the `function(error)` interface:
@@ -341,7 +339,7 @@ Any additional action handlers should implement the same interface. Action handl
   - `[success]` *(Function)*: To be called once the action handler is done and ready to return control to the framework, it implements the `function(viewName)` interface:
     - `viewName` *(String)*: The name of the view to be rendered.
 
-### Example
+#### Example
 
 ```javascript
 return LazoController.extend({
@@ -364,11 +362,11 @@ return LazoController.extend({
 });
 ```
 
-## `loadCollection(collectionName, options)`
+### `loadCollection(collectionName, options)`
 
 Loads the given collection.
 
-### Arguments
+#### Arguments
 
 1. `collectionName` *(String)*: The collection name, it should match a collection declared under the `models` directory;
 1. `[options]` *(Object)*: The options hash:
@@ -378,7 +376,7 @@ Loads the given collection.
   - `[success]` *(Function)*: Called after the collection instance has been successfully loaded, it must implement the `function(collection)` interface;
     - `collection` *(LazoCollection)*: The collection instance.
 
-### Example
+#### Example
 
 ```javascript
 this.loadCollection('people', {
@@ -394,11 +392,11 @@ this.loadCollection('people', {
 });
 ```
 
-## `loadModel(modelName, options)`
+### `loadModel(modelName, options)`
 
 Loads the given model.
 
-### Arguments
+#### Arguments
 
 1. `modelName` *(String)*: The model name, it should match a model declared under the `models` directory;
 1. `[options]` *(Object)*: The options hash:
@@ -408,7 +406,7 @@ Loads the given model.
   - `[success]` *(Function)*: Called after the model instance has been successfully loaded, it must implement the `function(model)` interface:
     - `model` *(LazoModel)*: The model instance.
 
-### Example
+#### Example
 
 ```javascript
 this.loadModel('person', {
@@ -424,11 +422,11 @@ this.loadModel('person', {
 });
 ```
 
-## <a name="navigate"></a>`navigate(action, options)`
+### <a name="navigate"></a>`navigate(action, options)`
 
 Forces navigation the to the given `action` handler.
 
-### Arguments
+#### Arguments
 
 1. `action` *(String)*: The name of the action handler to be executed;
 1. `[options]` *(Object)*: The options hash:
@@ -436,7 +434,7 @@ Forces navigation the to the given `action` handler.
     - `error` *(Error)*: The `Error` instance;
   - `[success]` *(Function)*: Called if navigation is successful.
 
-### Example
+#### Example
 
 ```javascript
 this.navigate('edit', {
@@ -451,20 +449,20 @@ this.navigate('edit', {
 ```
 
 <!--
-## `serialize`
+### `serialize`
 
-### Arguments
+#### Arguments
 
-### Returns
+#### Returns
 
-### Example
+#### Example
 -->
 
-## <a name="setCookie"></a>`setCookie(name, value, [options])`
+### <a name="setCookie"></a>`setCookie(name, value, [options])`
 
 Stores `value` under the given cookie `name`.
 
-### Arguments
+#### Arguments
 
 1. `name` *(String)*: The cookie name;
 2. `value` *(String)*: A string to be store under the cookie;
@@ -473,7 +471,7 @@ Stores `value` under the given cookie `name`.
   - `[expires]` *(Number)*: The cookie lifetime in days since its creation. It defaults to zero (current session);
   - `[path]` *(String)*: The path where the cookie is valid. It defaults to the current path.
 
-### Example
+#### Example
 
 ```javascript
 this.setCookie('preferences', 'foo=bar;baz=quux', {
@@ -483,28 +481,28 @@ this.setCookie('preferences', 'foo=bar;baz=quux', {
 });
 ```
 
-## <a name="setPageTitle"></a>`setPageTitle(title)`
+### <a name="setPageTitle"></a>`setPageTitle(title)`
 
 Sets the page title (displayed in the browser's title bar).
 
-### Arguments
+#### Arguments
 
 - `title` *(String)*: The new page title.
 
-## <a name="setSharedData"></a>`setSharedData(key, val)`
+### <a name="setSharedData"></a>`setSharedData(key, val)`
 
 Stores random data that can be accessed from both server and client runtimes.
 
-### Arguments
+#### Arguments
 
 - `key` *(String)*: The string key;
 - `val` *(Object)*: The object to be stored and shared.
 
-### Returns
+#### Returns
 
 *(Object)*: The current controller instance.
 
-### Example
+#### Example
 
 ```javascript
 this.setSharedData('foo', {
@@ -513,21 +511,21 @@ this.setSharedData('foo', {
 ```
 
 <!--
-## `toJSON(rootCtx)`
+### `toJSON(rootCtx)`
 
-### Arguments
+#### Arguments
 
-### Returns
+#### Returns
 
-### Example
+#### Example
 -->
 
 <!--
-## `transition(prevCtx, view, options)`
+### `transition(prevCtx, view, options)`
 
-### Arguments
+#### Arguments
 
-### Returns
+#### Returns
 
-### Example
+#### Example
 -->

@@ -1,5 +1,3 @@
-## Service Proxy
-
 A utility class that can be used to call service endpoints.
 This is exposed with the `proxy` property on the [LazoSyncher](LazoSyncher.md#proxy)
 

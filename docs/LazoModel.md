@@ -1,5 +1,3 @@
-## LazoModel
-
 LazoModels extend [Backbone.Model](http://backbonejs.org/#Model). Lazo also has the concept of a proxy
 layer – one for the client and one for the server. On the client it leverages a custom
 [Backbone.sync](http://backbonejs.org/#Sync) that sends all requests through a tunnel end
