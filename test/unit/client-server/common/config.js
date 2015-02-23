@@ -14,8 +14,6 @@ define([
 
         describe('config', function () {
 
-            config.clearPlugins(); //Clear configurations to run test in a clean state.
-
             config.addPlugin(new function(){
                 return {
                     data: {"key": "value"},
