@@ -1,75 +1,75 @@
 {
-    "name": "lazo",
-    "version": "2.0.2-alpha",
-    "description": "A client-server web framework built on Node.js that allows front-end developers to easily create a 100% SEO compliant, component MVC structured web application with an optimized first page load.",
-    "homepage": "https://github.com/lazojs/lazo",
-    "keywords": [
-        "backbone",
-        "requirejs",
-        "hapi",
-        "mvc",
-        "client-server",
-        "lazo",
-        "lazojs",
-        "isomorphic javascript",
-        "SEO"
-    ],
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "/blob/master/LICENSE-MIT"
-        }
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/lazojs/lazo"
-    },
-    "bugs": {
-        "url": "https://github.com/lazojs/lazo/issues"
-    },
-    "private": false,
-    "scripts": {
-        "start": "lazo",
-        "postinstall": "node bin/postinstall",
-        "test": "grunt test"
-    },
-    "main": "lazo",
-    "bin": {
-        "lazo": "lazo.js"
-    },
-    "dependencies": {
-        "crumb": "3.1.0",
-        "continuation-local-storage": "3.1.0",
-        "request": "2.40.0",
-        "forever": "0.10.8",
-        "fs-extra": "0.6.3",
-        "handlebars": "2.0.0",
-        "optimist": "0.6.0",
-        "node-dir": "0.1.5",
-        "lodash": "2.4.1",
-        "hapi": "6.7.1",
-        "requirejs": "2.1.11",
-        "backbone": "git://github.com/amdjs/backbone.git",
-        "underscore": "git://github.com/amdjs/underscore.git",
-        "jquery": "1.11.1",
-        "text": "git://github.com/requirejs/text.git",
-        "hermes-conrad": "1.0.0",
-        "jquery.cookie": "git://github.com/jstrimpel/jquery-cookie.git",
-        "requirejs-plugins": "git://github.com/jstrimpel/requirejs-plugins.git",
-        "async": "0.6.2",
-        "flexo.js": "0.2.1",
-        "htmlparser": "1.7.7",
-        "htmlparser-tostring": "0.0.2"
-    },
-    "devDependencies": {
-        "grunt-contrib-requirejs": "0.4.x",
-        "grunt": "0.4.5",
-        "grunt-contrib-watch": "0.5.x",
-        "intern": "2.1.1",
-        "sinon-chai": "2.6.0",
-        "sinon": "1.10.3",
-        "phantomjs": "1.9.13",
-        "selenium-server": "2.43.1",
-        "grunt-exec": "0.4.6"
+  "name": "lazo",
+  "version": "2.0.3-alpha",
+  "description": "A client-server web framework built on Node.js that allows front-end developers to easily create a 100% SEO compliant, component MVC structured web application with an optimized first page load.",
+  "homepage": "https://github.com/lazojs/lazo",
+  "keywords": [
+    "backbone",
+    "requirejs",
+    "hapi",
+    "mvc",
+    "client-server",
+    "lazo",
+    "lazojs",
+    "isomorphic javascript",
+    "SEO"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "/blob/master/LICENSE-MIT"
     }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lazojs/lazo"
+  },
+  "bugs": {
+    "url": "https://github.com/lazojs/lazo/issues"
+  },
+  "private": false,
+  "scripts": {
+    "start": "lazo",
+    "postinstall": "node bin/postinstall",
+    "test": "grunt test"
+  },
+  "main": "lazo",
+  "bin": {
+    "lazo": "lazo.js"
+  },
+  "dependencies": {
+    "crumb": "3.1.0",
+    "continuation-local-storage": "3.1.0",
+    "request": "2.40.0",
+    "forever": "0.10.8",
+    "fs-extra": "0.6.3",
+    "handlebars": "2.0.0",
+    "optimist": "0.6.0",
+    "node-dir": "0.1.5",
+    "lodash": "2.4.1",
+    "hapi": "6.7.1",
+    "requirejs": "2.1.11",
+    "backbone": "1.1.2",
+    "underscore": "1.7.0",
+    "jquery": "1.11.1",
+    "requirejs-text": "2.0.12",
+    "hermes-conrad": "1.0.0",
+    "jquery.cookie": "1.4.1",
+    "requirejs-plugins": "1.0.2",
+    "async": "0.6.2",
+    "flexo.js": "0.2.1",
+    "htmlparser": "1.7.7",
+    "htmlparser-tostring": "0.0.2"
+  },
+  "devDependencies": {
+    "grunt-contrib-requirejs": "0.4.x",
+    "grunt": "0.4.5",
+    "grunt-contrib-watch": "0.5.x",
+    "intern": "2.1.1",
+    "sinon-chai": "2.6.0",
+    "sinon": "1.10.3",
+    "phantomjs": "1.9.13",
+    "selenium-server": "2.43.1",
+    "grunt-exec": "0.4.6"
+  }
 }

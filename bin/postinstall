@@ -14,7 +14,6 @@ var path = require('path');
     'jquery',
     'underscore',
     'requirejs',
-    'text',
     'requirejs-plugins',
     'handlebars',
     'jquery.cookie',
@@ -23,37 +22,40 @@ var path = require('path');
     'lodash',
     'flexo.js',
     'htmlparser-tostring',
-    'htmlparser'
+    'htmlparser',
+    'requirejs-text'
 ].forEach(function (moduleId) {
-    var modulePath = require.resolve(moduleId);
-    var client = '';
-    if (moduleId === 'requirejs') {
-        // resolve to node_modules/requirejs/bin/r.js; pop off file name and last dir
-        // and append the browser lib
-        modulePath = path.dirname(path.dirname(modulePath)) + '/require.js';
-        moduleId = 'require';
-    } else if (moduleId === 'hermes-conrad') {
-        modulePath = path.dirname(modulePath) + '/hermes.amd.js';
-        moduleId = 'hermes.amd';
-        client = 'client/';
-    } else if (moduleId === 'flexo.js') {
-        modulePath = path.dirname(modulePath) + '/flexo.amd.js';
-        moduleId = 'flexo.amd';
-    } else if (moduleId === 'jquery.cookie') {
-        client = 'client/';
-        moduleId = 'jquery-cookie';
-    } else if (moduleId === 'jquery') {
-        client = 'client/';
-    } else if (moduleId === 'requirejs-plugins') {
-        moduleId = 'json';
-    } else if (moduleId === 'handlebars') {
-        moduleId = 'handlebars.amd';
-        modulePath = path.dirname(path.dirname(modulePath)) + '/dist/' + moduleId + '.js';
-    } else if (moduleId === 'htmlparser-tostring') {
-        modulePath = path.dirname(path.dirname(modulePath)) + '/dist/index.amd.js';
-    } else if (moduleId === 'htmlparser') {
-        modulePath = path.dirname(path.dirname(modulePath)) + '/lib/htmlparser.js';
-    }
+        var modulePath = require.resolve(moduleId);
+        var client = '';
+        if (moduleId === 'requirejs') {
+            // resolve to node_modules/requirejs/bin/r.js; pop off file name and last dir
+            // and append the browser lib
+            modulePath = path.dirname(path.dirname(modulePath)) + '/require.js';
+            moduleId = 'require';
+        } else if (moduleId === 'hermes-conrad') {
+            modulePath = path.dirname(modulePath) + '/hermes.amd.js';
+            moduleId = 'hermes.amd';
+            client = 'client/';
+        } else if (moduleId === 'flexo.js') {
+            modulePath = path.dirname(modulePath) + '/flexo.amd.js';
+            moduleId = 'flexo.amd';
+        } else if (moduleId === 'jquery.cookie') {
+            client = 'client/';
+            moduleId = 'jquery-cookie';
+        } else if (moduleId === 'jquery') {
+            client = 'client/';
+        } else if (moduleId === 'requirejs-plugins') {
+            moduleId = 'json';
+        } else if (moduleId === 'handlebars') {
+            moduleId = 'handlebars.amd';
+            modulePath = path.dirname(path.dirname(modulePath)) + '/dist/' + moduleId + '.js';
+        } else if (moduleId === 'htmlparser-tostring') {
+            modulePath = path.dirname(path.dirname(modulePath)) + '/dist/index.amd.js';
+        } else if (moduleId === 'htmlparser') {
+            modulePath = path.dirname(path.dirname(modulePath)) + '/lib/htmlparser.js';
+        } else if (moduleId === 'requirejs-text') {
+            moduleId = 'text';
+        }
 
-    fs.writeFileSync('lib/vendor/' + client + moduleId + '.js', fs.readFileSync(modulePath));
-});
+        fs.writeFileSync('lib/vendor/' + client + moduleId + '.js', fs.readFileSync(modulePath));
+    });
