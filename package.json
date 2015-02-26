@@ -1,6 +1,6 @@
 {
   "name": "lazo",
-  "version": "2.0.3-alpha",
+  "version": "2.0.4-alpha",
   "description": "A client-server web framework built on Node.js that allows front-end developers to easily create a 100% SEO compliant, component MVC structured web application with an optimized first page load.",
   "homepage": "https://github.com/lazojs/lazo",
   "keywords": [
@@ -49,8 +49,8 @@
     "lodash": "2.4.1",
     "hapi": "6.7.1",
     "requirejs": "2.1.11",
-    "backbone": "1.1.2",
-    "underscore": "1.7.0",
+    "backbone": "1.1.1",
+    "underscore": "1.6.0",
     "jquery": "1.11.1",
     "requirejs-text": "2.0.12",
     "hermes-conrad": "1.0.0",
