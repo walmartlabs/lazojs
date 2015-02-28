@@ -59,7 +59,7 @@ define(['intern/dojo/text!lib/common/resolver/paths.json', 'test/mocks/lazo', 'i
         },
 
         loader: {
-            shim: conf.requirejs.shim,
+            shim: conf.requirejs.client.shim,
             paths: paths.common,
             map: {
                 intern: {
