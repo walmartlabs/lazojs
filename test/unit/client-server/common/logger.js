@@ -57,6 +57,72 @@ define([
                 expect(logger.getLevel()).to.be.equal('debug');
             });
 
+            it('should return structured log output', function () {
+                var error = new Error('log error');
+                var logEntry = logger.warn(error, 'message');
+                expect(logEntry).to.have.property('error', error);
+                expect(logEntry).to.have.property('message', 'message');
+                expect(logEntry).to.have.property('level', 'WARN');
+                expect(logEntry).to.have.property('timestamp');
+                expect(logEntry).to.have.property('requestId');
+            });
+
+            it('should accept a structured log entry', function () {
+                var logData = {
+                    message: '1',
+                    random: '2',
+                    tags: ['test'],
+                    toString: function () {
+                        return 'prefix-' + this.message;
+                    }
+                };
+
+                var logEntry = logger.warn(logData);
+                expect(logEntry).to.have.property('error', null);
+                expect(logEntry).to.have.property('message', logData.message);
+                expect(logEntry).to.have.property('random', logData.random);
+                expect(logEntry).to.have.property('level', 'WARN');
+                expect(logEntry).to.have.property('timestamp');
+                expect(logEntry).to.have.property('requestId');
+                expect(logEntry.tags).to.have.length(2);
+                expect(logEntry.tags).to.include.members(['test','WARN']);
+                expect(logEntry.toString()).to.equal('prefix-1');
+            });
+
+            it('should assign error parameter to error property', function () {
+                var error = new Error('log error');
+                var logEntry = logger.warn('message', error);
+                expect(logEntry).to.have.property('error', error);
+                expect(logEntry).to.have.property('message');
+                expect(logEntry).to.have.property('level', 'WARN');
+                expect(logEntry).to.have.property('timestamp');
+                expect(logEntry).to.have.property('requestId');
+            });
+
+            it('should remain backwards compatible', function () {
+
+                // Account for difference in console.log() formatting (which is where the expectations have been copied from) to test for backwards compatibility
+                var compatibilityFormatter = function (logEntry) {
+                    // exclude timestamp for easier testing
+                    var columns = [logEntry.level, logEntry.requestId + '   ', logEntry.toString()];
+                    return columns.join('    ');
+                };
+
+                // expect(compatibilityFormatter(logger.warn({ message: 'this is a log entry' }))).to.equal('WARN    -       [object Object]'); // will not be equal
+                // When 1st arg is an object, the original error output is [object Object]
+                // This has been changed so a single object can be used to pass structured data
+
+                expect(compatibilityFormatter(logger.warn(new Error('log error')))).to.equal('WARN    -       Error: log error');
+                expect(compatibilityFormatter(logger.warn('message %d', 1))).to.equal('WARN    -       message 1');
+                expect(compatibilityFormatter(logger.warn('message %i', 1))).to.equal('WARN    -       message 1');
+                expect(compatibilityFormatter(logger.warn('message %f', 1.23))).to.equal('WARN    -       message 1.23');
+                expect(compatibilityFormatter(logger.warn('message %j', { id: 1}))).to.equal('WARN    -       message {"id":1}');
+                expect(compatibilityFormatter(logger.warn('message %s', '1'))).to.equal('WARN    -       message 1');
+                var expectation = LAZO.app.isServer ? 'WARN    -       message. {"message":"log error","stack":"Error: log error' : '{}';
+                expect(compatibilityFormatter(logger.warn('message.', new Error('log error')))).to.include(expectation);
+
+            });
+
             it('should call new registered sink', function () {
                 var dfd = this.async();
                 var stubSink = sinon.stub();
