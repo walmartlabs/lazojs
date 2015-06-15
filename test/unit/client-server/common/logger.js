@@ -5,9 +5,8 @@ define([
     'sinon',
     'intern/chai!',
     'sinon-chai',
-    'lib/common/logger',
-    'test/mocks/lazo'
-], function (bdd, expect, utils, sinon, chai, sinonChai, logger, LAZO) {
+    'lib/common/logger'
+], function (bdd, expect, utils, sinon, chai, sinonChai, logger) {
     chai.use(sinonChai);
 
     with (bdd) {
@@ -119,7 +118,7 @@ define([
                 expect(compatibilityFormatter(logger.warn('message %f', 1.23))).to.equal('WARN    -       message 1.23');
                 expect(compatibilityFormatter(logger.warn('message %j', { id: 1}))).to.equal('WARN    -       message {"id":1}');
                 expect(compatibilityFormatter(logger.warn('message %s', '1'))).to.equal('WARN    -       message 1');
-                var expectation = LAZO.app.isServer ? 'WARN    -       message. {"message":"log error","stack":"Error: log error' : '{}';
+                var expectation = LAZO.app.isServer ? 'WARN    -       message. {"message":"log error","stack":"Error: log error' : 'WARN    -       message. {';
                 expect(compatibilityFormatter(logger.warn('message.', new Error('log error')))).to.include(expectation);
 
             });
