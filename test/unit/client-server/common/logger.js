@@ -5,8 +5,9 @@ define([
     'sinon',
     'intern/chai!',
     'sinon-chai',
-    'lib/common/logger'
-], function (bdd, expect, utils, sinon, chai, sinonChai, logger) {
+    'lib/common/logger',
+    'test/mocks/lazo'
+], function (bdd, expect, utils, sinon, chai, sinonChai, logger, LAZO) {
     chai.use(sinonChai);
 
     with (bdd) {
