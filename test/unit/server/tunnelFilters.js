@@ -13,6 +13,7 @@ define([
         describe('Tunnel Filters', function () {
 
             var log = [];
+            var sync = {};
             var model = {};
             var params = {};
             var modifiedParams = { id: 1 };
@@ -43,6 +44,8 @@ define([
                     }
 
                     options.success(model, response);
+                    // options.continue(model, response);
+                    // options.next(model, response);
                 },
 
                 onError: function (model, response, options) {
@@ -52,6 +55,10 @@ define([
                     }
 
                     options.error(model, response);
+                    // options.continue(model, response);
+                    // options.return(model, response);
+                    // options.exit(model, response);
+                    // options.stop(model, response);
                 }
             };
 
@@ -70,21 +77,17 @@ define([
             it('onRequest handler should prevent sync function when it returns error', function () {
 
                 var dfd = this.async();
-                var sync = {};
                 var options = {
-                    error: function (resp) {
-                        expect(log).to.eql(['onRequest', 'onRequestFailed']);
+                    error: function (mdl, resp) {
+                        expect(log).to.eql(['onRequest', 'onError']);
+                        expect(mdl).to.equal(model);
                         expect(resp).to.equal(errorResponse);
                         dfd.resolve();
                     }
                 };
 
-                TunnelFilters.onRequest(sync, 'failOnRequest', model, params, {
-                    isSyncRequest: true,
-                    error: function (response) {
-                        log.push('onRequestFailed');
-                        return options.error(response);
-                    }
+                TunnelFilters.onRequest(sync, 'failOnRequest', model, params, options, {
+                    isSyncRequest: true
                 });
 
             });
@@ -92,7 +95,6 @@ define([
             it('onError handler should return error', function () {
 
                 var dfd = this.async();
-                var sync = {};
                 var response = {
                     statusCode: 200
                 };
@@ -105,12 +107,10 @@ define([
                     }
                 };
 
-                TunnelFilters.onRequest(sync, 'create', model, params, {
+                TunnelFilters.onRequest(sync, 'create', model, params, options, {
                     isSyncRequest: true,
-                    success: function (method, modelOrArgs, params) {
+                    success: function (method, modelOrArgs, params, opts) {
                         log.push('onSync');
-
-                        var opts = TunnelFilters.getFilterOptions(sync, options);
                         opts.error(modelOrArgs, response);
                     }
                 });
@@ -120,7 +120,6 @@ define([
             it('onSuccess handler should return error', function () {
 
                 var dfd = this.async();
-                var sync = {};
                 var response = {
                     statusCode: 200
                 };
@@ -133,13 +132,11 @@ define([
                     }
                 };
 
-                model.failOnSuccess = true;
-                TunnelFilters.onRequest(sync, 'create', model, params, {
+                TunnelFilters.onRequest(sync, 'create', model, params, options, {
                     isSyncRequest: true,
-                    success: function (method, modelOrArgs, params) {
+                    success: function (method, modelOrArgs, params, opts) {
                         log.push('onSync');
-
-                        var opts = TunnelFilters.getFilterOptions(sync, options);
+                        model.failOnSuccess = true;
                         opts.success(modelOrArgs, response);
                     }
                 });
@@ -149,7 +146,6 @@ define([
             it('onRequest handler should modify request', function () {
 
                 var dfd = this.async();
-                var sync = {};
                 var response = {
                     statusCode: 200
                 };
@@ -163,14 +159,13 @@ define([
                 };
 
                 model.modifyOnRequest = true;
-                TunnelFilters.onRequest(sync, 'create', model, params, {
+                TunnelFilters.onRequest(sync, 'create', model, params, options, {
                     isSyncRequest: true,
-                    success: function (method, modelOrArgs, params) {
+                    success: function (method, modelOrArgs, params, opts) {
 
                         expect(params).to.equal(modifiedParams);
 
                         log.push('onSync');
-                        var opts = TunnelFilters.getFilterOptions(sync, options);
                         opts.success(modelOrArgs, response);
                     }
                 });
@@ -180,7 +175,6 @@ define([
             it('onSuccess handler should modify response', function () {
 
                 var dfd = this.async();
-                var sync = {};
                 var response = {
                     statusCode: 200
                 };
@@ -193,14 +187,11 @@ define([
                     }
                 };
 
-                model.modifyOnSuccess = true;
-                TunnelFilters.onRequest(sync, 'create', model, params, {
+                TunnelFilters.onRequest(sync, 'create', model, params, options, {
                     isSyncRequest: true,
-                    success: function (method, modelOrArgs, params) {
-
+                    success: function (method, modelOrArgs, params, opts) {
                         log.push('onSync');
-
-                        var opts = TunnelFilters.getFilterOptions(sync, options);
+                        model.modifyOnSuccess = true;
                         opts.success(modelOrArgs, response);
                     }
                 });
@@ -211,7 +202,6 @@ define([
             it('onError handler should modify error', function () {
 
                 var dfd = this.async();
-                var sync = {};
                 var response = {
                     statusCode: 200
                 };
@@ -224,33 +214,20 @@ define([
                     }
                 };
 
-                model.modifyOnError = true;
-                TunnelFilters.onRequest(sync, 'create', model, params, {
+                TunnelFilters.onRequest(sync, 'create', model, params, options, {
                     isSyncRequest: true,
-                    success: function (method, modelOrArgs, params) {
-
+                    success: function (method, modelOrArgs, params, opts) {
                         log.push('onSync');
-
-                        var opts = TunnelFilters.getFilterOptions(sync, options); // TODO: Should this accept the inner success/error fn's?
-                        // TODO: Should a filter that errors onRequest, then jump to then iterate the 'onError' handlers of filters?
+                        modelOrArgs.modifyOnError = true;
                         opts.error(modelOrArgs, response);
                     }
                 });
-
-                //// TODO: Commit before making this change
-                //var isSyncReq = true;
-                //TunnelFilters.createFilterOptions(sync, isSyncReq, {
-                //    success: function (method, modelOrArgs, params, opts) {}, // adding extra opts allows for better control, and enables filteres to run on ALL errors
-                //    error: function (model, response, opts) {} // adding extra opts allows for better control, and enables filteres to run on ALL errors
-                //    // TODO: Prob don't need an error handler here, if the onRequest fails, then process will exit via filters
-                //});
 
             });
 
             it('should return original success response', function () {
 
                 var dfd = this.async();
-                var sync = {};
                 var response = {
                     statusCode: 200
                 };
@@ -266,17 +243,11 @@ define([
                     }
                 };
 
-                TunnelFilters.onRequest(sync, 'create', model, params, {
+                TunnelFilters.onRequest(sync, 'create', model, params, options, {
                     isSyncRequest: true,
-                    success: function (method, modelOrArgs, params) {
-
+                    success: function (method, modelOrArgs, params, opts) {
                         log.push('onSync');
-
-                        var opts = TunnelFilters.getFilterOptions(sync, options);
                         opts.success(modelOrArgs, response);
-                    },
-                    error: function (response) {
-                        return options.error(response);
                     }
                 });
 
@@ -285,7 +256,6 @@ define([
             it('should return original error response', function () {
 
                 var dfd = this.async();
-                var sync = {};
                 var response = {
                     statusCode: 500
                 };
@@ -298,13 +268,10 @@ define([
                     }
                 };
 
-                TunnelFilters.onRequest(sync, 'create', model, params, {
+                TunnelFilters.onRequest(sync, 'create', model, params, options, {
                     isSyncRequest: true,
-                    success: function (method, modelOrArgs, params) {
-
+                    success: function (method, modelOrArgs, params, opts) {
                         log.push('onSync');
-
-                        var opts = TunnelFilters.getFilterOptions(sync, options);
                         opts.error(modelOrArgs, response);
                     }
                 });
