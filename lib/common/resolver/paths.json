@@ -5,6 +5,7 @@
         "base": "lib/common/base",
         "config": "lib/common/config",
         "context": "lib/{env}/context",
+        "commonContext": "lib/common/context",
         "renderer": "lib/common/renderer",
         "text": "lib/vendor/text",
         "json": "lib/vendor/json",
