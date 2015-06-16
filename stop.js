@@ -1,3 +1,6 @@
+var path = require('path');
+var lazoPath = path.dirname(module.filename);
+
 module.exports = function () {
     var forever = require('forever');
     var fsx = require('fs-extra');
