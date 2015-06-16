@@ -67,6 +67,9 @@ define([
                     lazoSpy.restore();
                     dfd.resolve();
 
+                    return {
+                        code: function () {}
+                    };
                 };
 
                 Tunnel(req, reply);
@@ -117,6 +120,10 @@ define([
 
                     stub.restore();
                     dfd.resolve();
+
+                    return {
+                        code: function () {}
+                    };
 
                 };
 
@@ -169,6 +176,9 @@ define([
                     stub.restore();
                     dfd.resolve();
 
+                    return {
+                        code: function () {}
+                    };
                 };
 
                 Tunnel(req, reply);
