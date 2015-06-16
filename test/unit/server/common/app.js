@@ -39,6 +39,21 @@ define([
                 expect(headers[0].options).to.equal(null);
                 expect(app == lazoApp).to.be.true;
             });
+
+            it('should add tunnel filter', function () {
+                var lazoApp = new LazoApp({});
+                lazoApp.isServer = true;
+                var tunnelFilter = {
+                    onRequest: function (method, modelOrArgs, params, options) {},
+                    onSuccess: function (model, response, options) {},
+                    onError: function (model, response, options) {}
+                };
+
+                var fn = function () {
+                    lazoApp.addTunnelFilter(tunnelFilter);
+                };
+                expect(fn).to.not.throw();
+            });
         });
     }
 });
