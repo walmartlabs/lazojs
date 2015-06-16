@@ -28,15 +28,48 @@ define([
                 MyController.create('home', ctlOptions, options);
             };
 
-            it('should get/set the http status code', function () {
+            it('should get the http status code', function () {
                 var dfd = this.async();
                 getController({
                     success: function (controller) {
 
-                        expect(controller.getHttpStatusCode()).to.equal(200);
-                        var ctl = controller.setHttpStatusCode(410);
-                        expect(controller.getHttpStatusCode()).to.equal(410);
-                        expect(ctl == controller).to.be.true;
+                        controller.ctx.getHttpStatusCode = sinon.stub();
+                        controller.getHttpStatusCode();
+                        expect(controller.ctx.getHttpStatusCode.calledOnce).to.be.true;
+
+                        dfd.resolve();
+                    },
+                    error: function () {
+                        dfd.reject();
+                    }
+                });
+            });
+
+            it('should set the http status code', function () {
+                var dfd = this.async();
+                getController({
+                    success: function (controller) {
+
+                        controller.ctx.setHttpStatusCode = sinon.stub();
+                        controller.setHttpStatusCode(410);
+                        expect(controller.ctx.setHttpStatusCode.calledOnce).to.be.true;
+
+                        dfd.resolve();
+                    },
+                    error: function () {
+                        dfd.reject();
+                    }
+                });
+            });
+
+            it('should get http vary params', function () {
+                var dfd = this.async();
+                getController({
+                    success: function (controller) {
+
+                        controller.ctx.getHttpVaryParams = sinon.stub();
+                        controller.getHttpVaryParams();
+                        expect(controller.ctx.getHttpVaryParams.calledOnce).to.be.true;
 
                         dfd.resolve();
                     },
@@ -51,13 +84,9 @@ define([
                 getController({
                     success: function (controller) {
 
-                        expect(controller.getHttpVaryParams().length).to.equal(0);
-                        var ctl = controller.addHttpVaryParam('user-agent');
-
-                        var params = controller.getHttpVaryParams();
-                        expect(params.length).to.equal(1);
-                        expect(params[0]).to.equal('user-agent');
-                        expect(ctl == controller).to.be.true;
+                        controller.ctx.addHttpVaryParam = sinon.stub();
+                        controller.addHttpVaryParam('accept');
+                        expect(controller.ctx.addHttpVaryParam.calledOnce).to.be.true;
 
                         dfd.resolve();
                     },
@@ -72,15 +101,26 @@ define([
                 getController({
                     success: function (controller) {
 
-                        expect(controller.getHttpHeaders().length).to.equal(0);
-                        var ctl = controller.addHttpHeader('X-Frame-Options', 'deny');
+                        controller.ctx.addHttpHeader = sinon.stub();
+                        controller.addHttpHeader('X-Frame-Options', 'deny');
+                        expect(controller.ctx.addHttpHeader.calledOnce).to.be.true;
 
-                        var headers = controller.getHttpHeaders();
-                        expect(headers.length).to.equal(1);
-                        expect(headers[0].name).to.equal('X-Frame-Options');
-                        expect(headers[0].value).to.equal('deny');
-                        expect(headers[0].options).to.equal(null);
-                        expect(ctl == controller).to.be.true;
+                        dfd.resolve();
+                    },
+                    error: function () {
+                        dfd.reject();
+                    }
+                });
+            });
+
+            it('should get http headers', function () {
+                var dfd = this.async();
+                getController({
+                    success: function (controller) {
+
+                        controller.ctx.getHttpHeaders = sinon.stub();
+                        controller.getHttpHeaders();
+                        expect(controller.ctx.getHttpHeaders.calledOnce).to.be.true;
 
                         dfd.resolve();
                     },

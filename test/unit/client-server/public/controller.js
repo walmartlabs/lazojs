@@ -22,6 +22,12 @@ define([
                             statusCode: null,
                             httpHeaders: [],
                             varyParams: []
+                        },
+                        getHttpHeaders: function () {
+                            return [];
+                        },
+                        getHttpVaryParams: function () {
+                            return [];
                         }
                     }
                 };
