@@ -54,15 +54,22 @@ define([
                         var headerCount = httpResponse.getHttpHeaders().length;
                         var varyCount = httpResponse.getVaryParams().length;
 
-                        controller.setHttpStatusCode(410);
-                        controller.addHttpHeader('X-XSS-Protection', '1; mode=block');
-                        controller.addHttpVaryParam('accept');
+                        var getHttpStatusCodeStub = sinon.stub(controller, 'getHttpStatusCode').returns(410);
+                        var getHttpHeadersStub = sinon.stub(controller, 'getHttpHeaders').returns({name: 'X-XSS-Protection', value: '1; mode=block'});
+                        var getHttpVaryParamsStub = sinon.stub(controller, 'getHttpVaryParams').returns(['accept']);
 
                         var responseData = httpResponse.mergeHttpResponseData(controller);
                         expect(responseData).to.exist;
                         expect(responseData.statusCode).to.equal(410);
                         expect(responseData.httpHeaders.length).to.equal(headerCount + 1);
                         expect(responseData.varyParams.length).to.equal(varyCount + 1);
+                        expect(getHttpStatusCodeStub.calledOnce).to.be.true;
+                        expect(getHttpHeadersStub.calledOnce).to.be.true;
+                        expect(getHttpVaryParamsStub.calledOnce).to.be.true;
+
+                        getHttpStatusCodeStub.restore();
+                        getHttpHeadersStub.restore();
+                        getHttpVaryParamsStub.restore();
 
                         dfd.resolve();
                     },
