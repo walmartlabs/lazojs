@@ -6,9 +6,8 @@ define([
     'sinon-chai',
     'test/unit/utils',
     'httpResponse',
-    'lazoCtl',
-    'context'
-], function (bdd, chai, expect, sinon, sinonChai, utils, httpResponse, LazoController, Context) {
+    'lazoCtl'
+], function (bdd, chai, expect, sinon, sinonChai, utils, httpResponse, LazoController) {
     chai.use(sinonChai);
 
     with (bdd) {
