@@ -36,7 +36,8 @@ define([
                             dependencies: {
                                 css: [{ href: 'c.css' }],
                                 imports: [{ href: 'c.html' }]
-                            }
+                            },
+                            title: 'pageTitle'
                         }
                 };
 
@@ -84,9 +85,11 @@ define([
 
                 expect(state.get(window.location.pathname + window.location.search).state.dependencies.css.length).to.be.equal(1);
                 expect(state.get(window.location.pathname + window.location.search).state.dependencies.imports.length).to.be.equal(1);
+                expect(state.get(window.location.pathname + window.location.search).state.title).to.equal('pageTitle');
                 state.set(ctx);
                 expect(state.get(window.location.pathname + window.location.search).state.dependencies.css.length).to.be.equal(2);
                 expect(state.get(window.location.pathname + window.location.search).state.dependencies.imports.length).to.be.equal(2);
+                expect(state.get(window.location.pathname + window.location.search).state.title).to.equal('pageTitle');
             });
 
             it('should get the css to add and remove', function () {
