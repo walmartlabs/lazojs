@@ -46,6 +46,11 @@ define([
 
                 LAZO.app.loadModel = function (fname, opts) {
                     opts.success({
+                        ctx: {
+                            getHttpStatusCode: function () {},
+                            getHttpHeaders: function () {},
+                            getHttpVaryParams: function () {}
+                        },
                         _getGlobalId: function () {},
                         toJSON: function () {}
                     });
@@ -61,6 +66,10 @@ define([
 
                     lazoSpy.restore();
                     dfd.resolve();
+
+                    return {
+                        code: function () {}
+                    };
                 };
 
                 Tunnel(req, reply);
@@ -86,6 +95,11 @@ define([
 
                 var stub = sinon.stub(LazoModel.prototype, 'destroy', function (opts) {
                             opts.success({
+                                ctx: {
+                                    getHttpStatusCode: function () {},
+                                    getHttpHeaders: function () {},
+                                    getHttpVaryParams: function () {}
+                                },
                                 _getGlobalId: function () {},
                                 toJSON: function () {}
                             });
@@ -106,6 +120,11 @@ define([
 
                     stub.restore();
                     dfd.resolve();
+
+                    return {
+                        code: function () {}
+                    };
+
                 };
 
                 Tunnel(req, reply);
@@ -131,6 +150,11 @@ define([
 
                 var stub = sinon.stub(LazoModel.prototype, 'save', function (args, opts) {
                     opts.success({
+                        ctx: {
+                            getHttpStatusCode: function () {},
+                            getHttpHeaders: function () {},
+                            getHttpVaryParams: function () {}
+                        },
                         _getGlobalId: function () {},
                         toJSON: function () {}
                     });
@@ -151,6 +175,10 @@ define([
 
                     stub.restore();
                     dfd.resolve();
+
+                    return {
+                        code: function () {}
+                    };
                 };
 
                 Tunnel(req, reply);
@@ -198,6 +226,12 @@ define([
 
                     stub.restore();
                     dfd.resolve();
+
+                    return {
+                        code: function () {},
+                        header: function () {},
+                        vary: function () {}
+                    };
                 };
 
                 Tunnel(req, reply);

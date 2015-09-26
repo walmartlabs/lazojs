@@ -67,7 +67,8 @@
         "forbidden": "lib/server/forbidden",
         "appServerSetup": "lib/public/server/server",
         "lazoServer": "lib/public/server/server",
-        "httpResponse": "lib/server/httpResponse"
+        "httpResponse": "lib/server/httpResponse",
+        "tunnelFilters": "lib/server/tunnelFilters"
     },
     "lib": [
         "assetsProvider",
