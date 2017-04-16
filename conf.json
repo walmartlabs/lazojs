@@ -17,6 +17,7 @@
             },
             "maxBytes": 10485760,
             "debug": false,
+            "security": true,
             "state": {
                 "cookies": {
                     "failAction": "log",
