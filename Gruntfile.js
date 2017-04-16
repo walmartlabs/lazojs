@@ -39,6 +39,8 @@ module.exports = function (grunt) {
     // local
     grunt.registerTask('test-local', ['test-server', 'test-client-local']);
 
+    grunt.registerTask('docs', ['markdown']);
+
     grunt.registerTask('test-server', ['configure-intern:server', 'intern:server']);
     grunt.registerTask('test-client', function () {
         var tasks = ['configure-intern:client', 'intern:client'];
@@ -117,6 +119,22 @@ module.exports = function (grunt) {
             }
         },
 
+        markdown: {
+            all: {
+                files: [
+                    {
+                        expand: true,
+                        src: 'docs/*.md',
+                        dest: 'docs/generated/',
+                        ext: '.hbs'
+                    }
+                ]
+            },
+            options: {
+                template: './docs-template.jst'
+            }
+        },
+
         exec: { 'selenium-server': 'node node_modules/selenium-server/bin/selenium &' }
 
     });
@@ -125,4 +143,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('intern');
     grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-markdown');
 };

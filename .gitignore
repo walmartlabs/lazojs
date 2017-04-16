@@ -3,6 +3,7 @@ lib-cov
 node_modules
 reports
 test/specs/html/**
+docs/generated/**
 node_modules
 npm-debug.log
 lib/vendor
